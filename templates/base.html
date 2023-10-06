@@ -73,8 +73,8 @@
               <li class="menu-has-children">
                 <a href="">Blog</a>
                 <ul>
-                  <li><a href="blog-home.html">Blog Home</a></li>
-                  <li><a href="blog-single.html">Blog Single</a></li>
+                  <li><a href="{% url "blog:home" %}">Blog Home</a></li>
+                  <li><a href="{% url "blog:single" %}">Blog Single</a></li>
                 </ul>
               </li>
               <li class="menu-has-children">
@@ -98,8 +98,6 @@
       </div>
     </header>
     <!-- #header -->
-  </body>
-</html>
 
 {% block main_content %} {% endblock main_content %}
 
