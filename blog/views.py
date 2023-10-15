@@ -1,5 +1,5 @@
 import datetime
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from blog.models import Post
 # Create your views here.
 
@@ -11,5 +11,9 @@ def home_view(request):
     return render(request, "blog/blog-home.html", context)
 
 
-def single_view(request):
-    return render(request, "blog/blog-single.html")
+def single_view(request, pid):
+    post = get_object_or_404(Post, id=pid)
+    post.counted_views += 1
+    post.save()
+    context = {'post': post}
+    return render(request, "blog/blog-single.html", context)
