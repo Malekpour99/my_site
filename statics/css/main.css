@@ -3381,7 +3381,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .post-content-area .single-post .meta-details {
-  text-align: right;
+  text-align: left;
   margin-top: 35px;
 }
 
@@ -3423,7 +3423,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .post-content-area .single-post .view a,
 .post-content-area .single-post .comments a {
   color: #777777;
-  margin-right: 10px;
+  margin-left: 10px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
@@ -4493,4 +4493,11 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .footer-text a, .footer-text i {
   color: #f8b600;
+}
+
+.post-content-area .single-post .meta-details .first-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding-top: 10px;
 }
