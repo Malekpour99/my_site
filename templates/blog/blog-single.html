@@ -212,14 +212,9 @@
 						</div>
 						<div class="col-lg-4 sidebar-widgets">
 							<div class="widget-wrap">
-								<div class="single-sidebar-widget search-widget">
-									<form class="search-form" action="#">
-			                            <input placeholder="Search Posts" name="search" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Posts'" >
-			                            <button type="submit"><i class="fa fa-search"></i></button>
-			                        </form>
-								</div>
+								{% include "blog/includes/blog-search.html" %}
 
-								{% include "blog/blog-author.html" %}
+								{% include "blog/includes/blog-author.html" %}
 
 								<div class="single-sidebar-widget popular-post-widget">
 									<h4 class="popular-title">Popular Posts</h4>
@@ -263,7 +258,7 @@
 									</div>
 								</div>
 								
-								{% include "blog/blog-ads.html" %}
+								{% include "blog/includes/blog-ads.html" %}
 
 								<div class="single-sidebar-widget post-category-widget">
 									<h4 class="category-title">Post Catgories</h4>
