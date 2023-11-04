@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load blog_tags %}
 {% block main_content %}
 			<!-- start banner Area -->
 			<section class="banner-area relative blog-home-banner" id="home">	
@@ -148,7 +149,7 @@
 
 								{% include "blog/includes/blog-author.html" %}
 								
-								{% include "blog/includes/blog-popular-posts.html" %}
+								{% latest_posts 4 %}
 								
 								{% include "blog/includes/blog-ads.html" %}
 								
