@@ -47,7 +47,7 @@
 										<div class="first-row">
 											<ul class="tags">
 												{% for category in post.category.all %}
-													<li><a href="#">{{ category.name }}</a></li>{% if not forloop.last %},{% endif %}
+													<li><a href="{% url "blog:category" category.name %}">{{ category.name }}</a></li>{% if not forloop.last %},{% endif %}
 												{% endfor %}
 											</ul>
 											<ul class="social-links">
