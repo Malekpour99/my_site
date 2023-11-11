@@ -2,6 +2,7 @@ import datetime
 from django.shortcuts import render, get_object_or_404
 from blog.models import Post
 from django.db.models import Q
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 # Create your views here.
 
 
@@ -12,6 +13,17 @@ def home_view(request, cat_name=None, author_username=None):
         posts = posts.filter(category__name=cat_name)
     if author_username:
         posts = posts.filter(author__username=author_username)
+
+    posts = Paginator(posts, 4)
+    try:
+        page_number = request.GET.get('page')
+        posts = posts.page(page_number)
+    except PageNotAnInteger:
+        # if page_number is not an integer then return the first page
+        posts = posts.page(1)
+    except EmptyPage:
+        # if page is empty then return the last page
+        posts = posts.page(posts.num_pages)
     context = {'posts': posts}
     return render(request, "blog/blog-home.html", context)
 
