@@ -7,6 +7,13 @@ class ContactForm(forms.ModelForm):
         model = Contact
         fields = "__all__"
 
+    # def save(self, commit=True):
+    #     instance = super(ContactForm, self).save(commit=False)
+    #     instance.name = "Unkown"
+    #     if commit:
+    #         instance.save()
+    #     return instance
+
 
 class NewsletterForm(forms.ModelForm):
     class Meta:
