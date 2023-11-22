@@ -19,6 +19,7 @@ def contact_view(request):
             messages.add_message(request, messages.SUCCESS, "Your Ticket Submitted Successfully!")
         else:
             messages.add_message(request, messages.ERROR, "Your Ticket Didn't Submit!")
+        return HttpResponseRedirect('/')
     form = ContactForm()
     return render(request, "website/contact.html", {"form": form})
 
