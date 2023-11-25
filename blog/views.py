@@ -1,4 +1,4 @@
-import datetime
+from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from blog.models import Post
 from taggit.models import Tag
@@ -9,7 +9,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 def home_view(request, **kwargs):
     posts = Post.objects.filter(
-        published_date__lte=datetime.datetime.now(), status=True)
+        published_date__lte=timezone.now(), status=True)
     all_tags = Tag.objects.all()
     if kwargs.get("cat_name"):
         posts = posts.filter(category__name=kwargs["cat_name"])
@@ -34,7 +34,7 @@ def home_view(request, **kwargs):
 
 def single_view(request, pid):
     posts = Post.objects.filter(
-        published_date__lte=datetime.datetime.now(), status=True)
+        published_date__lte=timezone.now(), status=True)
     post = get_object_or_404(posts, id=pid)
     tags = post.tags.all()
     # post = get_object_or_404(Post, id=pid) # this is unsafe because you can access not published posts by using ID
