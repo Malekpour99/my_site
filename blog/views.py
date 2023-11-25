@@ -1,18 +1,22 @@
 import datetime
 from django.shortcuts import render, get_object_or_404
 from blog.models import Post
+from taggit.models import Tag
 from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 # Create your views here.
 
 
-def home_view(request, cat_name=None, author_username=None):
+def home_view(request, **kwargs):
     posts = Post.objects.filter(
         published_date__lte=datetime.datetime.now(), status=True)
-    if cat_name:
-        posts = posts.filter(category__name=cat_name)
-    if author_username:
-        posts = posts.filter(author__username=author_username)
+    all_tags = Tag.objects.all()
+    if kwargs.get("cat_name"):
+        posts = posts.filter(category__name=kwargs["cat_name"])
+    if kwargs.get("tag_name"):
+        posts = posts.filter(tags__name__in=[kwargs["tag_name"]])
+    if kwargs.get("author_username"):
+        posts = posts.filter(author__username=kwargs["author_username"])
 
     posts = Paginator(posts, 4)
     try:
@@ -24,7 +28,7 @@ def home_view(request, cat_name=None, author_username=None):
     except EmptyPage:
         # if page is empty then return the last page
         posts = posts.page(posts.num_pages)
-    context = {'posts': posts}
+    context = {'posts': posts, 'tags': all_tags}
     return render(request, "blog/blog-home.html", context)
 
 
@@ -32,6 +36,7 @@ def single_view(request, pid):
     posts = Post.objects.filter(
         published_date__lte=datetime.datetime.now(), status=True)
     post = get_object_or_404(posts, id=pid)
+    tags = post.tags.all()
     # post = get_object_or_404(Post, id=pid) # this is unsafe because you can access not published posts by using ID
     post.counted_views += 1
     post.save()
@@ -43,6 +48,7 @@ def single_view(request, pid):
     if current_index + 1 < len(list(posts)):
         previous_post = list(posts)[current_index + 1]
     context = {'post': post,
+               'tags': tags,
                'next_post': next_post,
                'previous_post': previous_post}
     return render(request, "blog/blog-single.html", context)
