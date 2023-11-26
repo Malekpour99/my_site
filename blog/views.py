@@ -57,9 +57,9 @@ def single_view(request, pid):
 def search_view(request):
     # print(request.__dict__) # for seeing request contents
     posts = Post.objects.filter(
-        published_date__lte=datetime.datetime.now(), status=True)
+        published_date__lte=timezone.now(), status=True)
     if request.method == 'GET':
-        # using python "warlus" option ( := ) for less code
+        # python "warlus" option ( := ) assign the value to the variable -> less code
         if search_query := request.GET.get('search'):
             posts = posts.filter(Q(content__contains=search_query) | Q(title__contains=search_query))
     context = {'posts': posts}
