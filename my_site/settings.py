@@ -154,3 +154,17 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+# Django summernote settings
+# X_FRAME_OPTIONS = "SAMEORIGIN"
+SUMMERNOTE_THEME = 'bs4'
+SUMMERNOTE_CONFIG = {
+    # Using SummernoteWidget - iframe mode, default
+    'iframe': True,
+
+    # You can put custom Summernote settings
+    'summernote': {
+        # As an example, using Summernote Air-mode
+        'airMode': False,
+    }
+}
