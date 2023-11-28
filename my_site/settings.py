@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "multi_captcha_admin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -67,6 +68,11 @@ SITE_ID = 2
 # Robots
 ROBOTS_USE_HOST = True
 ROBOTS_USE_SITEMAP = True
+
+# Admin Captcha Configurations
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
 
 ROOT_URLCONF = "my_site.urls"
 
