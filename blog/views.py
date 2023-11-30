@@ -1,6 +1,6 @@
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
-from blog.models import Post
+from blog.models import Post, Comment
 from taggit.models import Tag
 from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -36,6 +36,7 @@ def single_view(request, pid):
     posts = Post.objects.filter(
         published_date__lte=timezone.now(), status=True)
     post = get_object_or_404(posts, id=pid)
+    comments = Comment.objects.filter(post=post, approved=True)
     tags = post.tags.all()
     # post = get_object_or_404(Post, id=pid) # this is unsafe because you can access not published posts by using ID
     post.counted_views += 1
@@ -48,6 +49,7 @@ def single_view(request, pid):
     if current_index + 1 < len(list(posts)):
         previous_post = list(posts)[current_index + 1]
     context = {'post': post,
+               'comments': comments,
                'tags': tags,
                'next_post': next_post,
                'previous_post': previous_post}
