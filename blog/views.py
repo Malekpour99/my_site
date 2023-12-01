@@ -1,8 +1,10 @@
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from blog.models import Post, Comment
+from blog.forms import CommentForm
 from taggit.models import Tag
 from django.db.models import Q
+from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 # Create your views here.
 
@@ -33,11 +35,20 @@ def home_view(request, **kwargs):
 
 
 def single_view(request, pid):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "Your Comment Submitted Successfully!")
+        else:
+            messages.add_message(request, messages.ERROR, "Your Comment Didn't Submit!")
+
     posts = Post.objects.filter(
         published_date__lte=timezone.now(), status=True)
     post = get_object_or_404(posts, id=pid)
     comments = Comment.objects.filter(post=post, approved=True)
     tags = post.tags.all()
+    form = CommentForm()
     # post = get_object_or_404(Post, id=pid) # this is unsafe because you can access not published posts by using ID
     post.counted_views += 1
     post.save()
@@ -50,6 +61,7 @@ def single_view(request, pid):
         previous_post = list(posts)[current_index + 1]
     context = {'post': post,
                'comments': comments,
+               'form': form,
                'tags': tags,
                'next_post': next_post,
                'previous_post': previous_post}
