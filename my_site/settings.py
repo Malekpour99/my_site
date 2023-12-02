@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     "django_summernote",
     "captcha",
     "website.apps.WebsiteConfig",
-    "blog.apps.BlogConfig"
+    "blog.apps.BlogConfig",
+    "accounts.apps.AccountConfig"
 ]
 
 MIDDLEWARE = [
