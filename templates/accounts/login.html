@@ -29,7 +29,7 @@
     <main class="form-signin">
       <form method="post" action="{% url 'accounts:login' %}">
         {% csrf_token %}
-        <!-- Email input -->
+        {% comment %} <!-- Email input -->
         <div class="form-outline mb-4">
           <label class="form-label" for="username">Username</label>
           <input type="text" id="username" name="username" class="form-control" />
@@ -39,8 +39,10 @@
         <div class="form-outline mb-4">
           <label class="form-label" for="password">Password</label>
           <input type="password" id="password" name="password" class="form-control" />
-        </div>
+        </div> {% endcomment %}
       
+        {{ form.as_p }}
+
         <!-- 2 column grid layout for inline styling -->
         <div class="row mb-4">
           <div class="col d-flex justify-content-center">
