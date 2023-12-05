@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -32,4 +32,16 @@ def logout_view(request):
 
 
 def signin_view(request):
-    pass
+    if not request.user.is_authenticated:
+        if request.method == "POST":
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect("/")
+
+        form = AuthenticationForm()
+        context = {"form": form}
+        return render(request, "accounts/sign-in.html", context)
+
+    else:
+        return redirect("/")
