@@ -29,7 +29,7 @@
     <main class="form-signin">
       <form method="post" action="{% url 'accounts:login' %}">
         {% csrf_token %}
-        <!-- Email input -->
+        <!-- Username input -->
         <div class="form-outline mb-4">
           <label class="form-label" for="username">Username</label>
           <input type="text" id="username" name="username" class="form-control" />
@@ -58,9 +58,14 @@
             <a href="#">Forgot password?</a>
           </div>
         </div>
-      
+
         <!-- Submit button -->
         <button type="Submit" class="btn btn-primary btn-block mb-4">Login</button>
+
+        <div class="form-outline">
+          <label class="form-label">Doesn't have an account?</label>
+          <a href="{% url 'accounts:signin' %}">Sign-in here!</a>
+        </div>
       </form>
     </main>
   </body>
