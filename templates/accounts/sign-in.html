@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="Hugo 0.84.0" />
+    <title>Signin</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="text-center">
+    <main class="form-signin">
+      <form method="post" action="{% url 'accounts:signin' %}">
+        {% csrf_token %}
+        <!-- Username input -->
+        <div class="form-outline mb-3">
+          <label class="form-label" for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="form-control"
+          />
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-3">
+          <label class="form-label" for="password1">Password</label>
+          <input
+            type="password"
+            id="password1"
+            name="password1"
+            class="form-control"
+          />
+        </div>
+        <!-- Password Confirmation input -->
+        <div class="form-outline mb-3">
+          <label class="form-label" for="password2">Confirm Password</label>
+          <input
+            type="password"
+            id="password2"
+            name="password2"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-outline mb-2">
+          <label class="form-label">Already have an account?</label>
+          <a href="{% url 'accounts:login' %}">Login here!</a>
+        </div>
+
+        {% comment %} {{ form.as_p }} {% endcomment %}
+
+        <!-- Submit button -->
+        <button type="Submit" class="btn btn-primary btn-block mb-4">
+          Sign-in
+        </button>
+      </form>
+    </main>
+  </body>
+</html>
