@@ -27,7 +27,7 @@
   </head>
   <body class="text-center">
     <main class="form-signin">
-      <form method="post" action="{% url 'accounts:login' %}">
+      <form method="post" action="{% url 'accounts:login' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
         {% csrf_token %}
         <!-- Username input -->
         <div class="form-outline mb-4">
