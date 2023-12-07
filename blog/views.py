@@ -48,7 +48,8 @@ def single_view(request, pid):
     posts = Post.objects.filter(
         published_date__lte=timezone.now(), status=True)
     post = get_object_or_404(posts, id=pid)
-    if not post.require_login:
+    # checking if the post requires user to be logged in
+    if not post.require_login or request.user.is_authenticated:
         comments = Comment.objects.filter(post=post, approved=True)
         tags = post.tags.all()
         form = CommentForm()
@@ -70,7 +71,8 @@ def single_view(request, pid):
                 'previous_post': previous_post}
         return render(request, "blog/blog-single.html", context)
     else:
-        return HttpResponseRedirect(reverse("accounts:login"))
+        path = reverse("accounts:login") + "?next=" + request.path
+        return HttpResponseRedirect(path)
 
 
 def search_view(request):
