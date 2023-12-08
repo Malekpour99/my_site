@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
+from .forms import LoginForm
 
 # Create your views here.
 
@@ -10,11 +11,12 @@ def login_view(request):
     redirect_to = request.POST.get('next', request.GET.get('next', '/'))
     if not request.user.is_authenticated:
         if request.method == "POST":
-            form = AuthenticationForm(request=request, data=request.POST)
+            # form = AuthenticationForm(request=request, data=request.POST)
+            form = LoginForm(request.POST)
             if form.is_valid():
-                username = form.cleaned_data.get("username")
+                username_or_email = form.cleaned_data.get("username_or_email")
                 password = form.cleaned_data.get("password")
-                user = authenticate(request, username=username, password=password)
+                user = authenticate(request, username=username_or_email, password=password)
                 if user is not None:
                     login(request, user)
                     return redirect(redirect_to)
