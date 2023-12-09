@@ -27,14 +27,9 @@
   </head>
   <body class="text-center">
     <main class="form-signin">
-      {% if messages %}
-            {% for message in messages %}
-                <div
-                class="alert {% if message.tags == 'error' %} alert-danger {% elif message.tags %} alert-{{ message.tags }}{% endif %}">
-                {{ message|safe }}
-                </div>
-            {% endfor %} 
-      {% endif %}
+
+      {% include "accounts/includes/messages.html" %}
+      
       <form method="post" action="{% url 'accounts:login' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
         {% csrf_token %}
         <!-- Username input -->
