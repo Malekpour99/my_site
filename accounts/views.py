@@ -1,8 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm
+from .forms import LoginForm, CustomUserCreationForm
 
 # Create your views here.
 
@@ -37,10 +39,19 @@ def logout_view(request):
 def signin_view(request):
     if not request.user.is_authenticated:
         if request.method == "POST":
-            form = UserCreationForm(request.POST)
+            form = CustomUserCreationForm(request.POST)
             if form.is_valid():
-                form.save()
+                username = form.cleaned_data.get("username")
+                password = form.cleaned_data.get("password1")
+                email = form.cleaned_data.get("email")
+                user = User.objects.create_user(username, email, password)
+                user.save()
+                messages.add_message(request, messages.SUCCESS, "User has been created Successfully! \nYou can now login.")
                 return redirect("/")
+            else:
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        messages.add_message(request, messages.ERROR, f'{field}: {error}')
 
         form = AuthenticationForm()
         context = {"form": form}
