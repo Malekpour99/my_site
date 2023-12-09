@@ -27,6 +27,14 @@
   </head>
   <body class="text-center">
     <main class="form-signin">
+      {% if messages %} 
+            {% for message in messages %}
+                <div
+                class="alert {% if message.tags == 'error' %} alert-danger {% elif message.tags %} alert-{{ message.tags }}{% endif %}">
+                {{ message|safe }}
+                </div>
+            {% endfor %} 
+      {% endif %}
       <form method="post" action="{% url 'accounts:signin' %}">
         {% csrf_token %}
         <!-- Username input -->
@@ -36,6 +44,17 @@
             type="text"
             id="username"
             name="username"
+            class="form-control"
+          />
+        </div>
+
+        <!-- Email input -->
+        <div class="form-outline mb-3">
+          <label class="form-label" for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
             class="form-control"
           />
         </div>
