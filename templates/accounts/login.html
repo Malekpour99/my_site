@@ -1,75 +1,57 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content="Hugo 0.84.0" />
-    <title>Login</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+{% extends 'accounts-base.html' %} 
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
+{% block main_content %} 
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-  </head>
-  <body class="text-center">
-    <main class="form-signin">
+{% include "accounts/includes/messages.html" %}
 
-      {% include "accounts/includes/messages.html" %}
-      
-      <form method="post" action="{% url 'accounts:login' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
-        {% csrf_token %}
-        <!-- Username input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="username">Username/Email:</label>
-          <input type="text" id="username" name="username_or_email" class="form-control" />
-        </div>
-      
-        <!-- Password input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="password">Password:</label>
-          <input type="password" id="password" name="password" class="form-control" />
-        </div>
-      
-        {% comment %} {{ form.as_p }} {% endcomment %}
+<form
+  method="post"
+  action="{% url 'accounts:login' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}"
+>
+  {% csrf_token %}
+  <!-- Username input -->
+  <div class="form-outline mb-4">
+    <label class="form-label" for="username">Username/Email:</label>
+    <input
+      type="text"
+      id="username"
+      name="username_or_email"
+      class="form-control"
+    />
+  </div>
 
-        <!-- 2 column grid layout for inline styling -->
-        <div class="row mb-4">
-          <div class="col d-flex justify-content-center">
-            <!-- Checkbox -->
-            <div class="form-check">
-              <label class="form-check-label" for="form2Example31"> Remember me </label>
-              <input class="form-check-input" type="checkbox" value="" />
-            </div>
-          </div>
-      
-          <div class="col">
-            <!-- Simple link -->
-            <a href="#">Forgot password?</a>
-          </div>
-        </div>
+  <!-- Password input -->
+  <div class="form-outline mb-4">
+    <label class="form-label" for="password">Password:</label>
+    <input type="password" id="password" name="password" class="form-control" />
+  </div>
 
-        <!-- Submit button -->
-        <button type="Submit" class="btn btn-primary btn-block mb-4">Login</button>
+  {% comment %} {{ form.as_p }} {% endcomment %}
 
-        <div class="form-outline">
-          <label class="form-label">Doesn't have an account?</label>
-          <a href="{% url 'accounts:signin' %}">Sign-in here!</a>
-        </div>
-      </form>
-    </main>
-  </body>
-</html>
+  <!-- 2 column grid layout for inline styling -->
+  <div class="row mb-4">
+    <div class="col d-flex justify-content-center">
+      <!-- Checkbox -->
+      <div class="form-check">
+        <label class="form-check-label" for="form2Example31">
+          Remember me
+        </label>
+        <input class="form-check-input" type="checkbox" value="" />
+      </div>
+    </div>
+
+    <div class="col">
+      <!-- Simple link -->
+      <a href="#">Forgot password?</a>
+    </div>
+  </div>
+
+  <!-- Submit button -->
+  <button type="Submit" class="btn btn-primary btn-block mb-4">Login</button>
+
+  <div class="form-outline">
+    <label class="form-label">Doesn't have an account?</label>
+    <a href="{% url 'accounts:signin' %}">Sign-in here!</a>
+  </div>
+</form>
+{% endblock main_content %}
