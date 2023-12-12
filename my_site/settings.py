@@ -97,7 +97,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "my_site.wsgi.application"
 
+# Custom backend settings for authentication
 AUTHENTICATION_BACKENDS = ['accounts.backends.MyBackend']
+
+# Using console based Email message to reset password, instead of SMTP Service
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# SMTP service configuration for sending emails
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'your_email@gmail.com'
+# EMAIL_HOST_PASSWORD = 'email_generated_app_password!'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
