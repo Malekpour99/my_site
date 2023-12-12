@@ -5,8 +5,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, CustomUserCreationForm
-
-# Create your views here.
+from django.contrib.auth.views import PasswordResetConfirmView
+from django.urls import reverse_lazy
 
 
 def login_view(request):
@@ -77,3 +77,16 @@ def signin_view(request):
 
     else:
         return redirect("/")
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = "accounts/password_reset_confirm.html"
+    # user 'reverse' or 'reverse_lazy' for constructing URLs to prevent security issues!!
+    success_url = reverse_lazy("accounts:password_reset_complete")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Adding uidb64 and token to the template context
+        context["uidb64"] = self.kwargs["uidb64"]
+        context["token"] = self.kwargs["token"]
+        return context
