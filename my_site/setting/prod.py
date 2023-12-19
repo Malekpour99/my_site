@@ -14,7 +14,7 @@ CSRF_COOKIE_SECURE = True
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["themalekpour.com", "www.themalekpour.com"]
 
 # INSTALLED_APPS # if required
 
@@ -30,7 +30,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'malekpour.projects@gmail.com'
-EMAIL_HOST_PASSWORD = 'iwdj urbh emhh baaw'
+EMAIL_HOST_PASSWORD = 'app_password'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
