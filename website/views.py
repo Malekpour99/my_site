@@ -34,3 +34,6 @@ def newsletter_view(request):
 
 def about_view(request):
     return render(request, "website/about.html")
+
+def coming_soon_view(request):
+    return render(request, "website/coming_soon.html")
