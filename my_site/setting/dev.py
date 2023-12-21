@@ -11,6 +11,9 @@ SECRET_KEY = "django-insecure-ne0c2=(4*u1k5p+m)zxz46l8k1&gzwse7^n)j=!j7wgdr-m&$w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Redirecting to coming soon template
+COMING_SOON = False  # Set to False when you are ready to launch
+
 ALLOWED_HOSTS = []
 
 # INSTALLED_APPS # if required
