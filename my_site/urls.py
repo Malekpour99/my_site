@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from website.sitemaps import StaticViewSitemap
 from blog.sitemaps import BlogSitemap
+from website.views import coming_soon_view
 
 sitemaps = {
     "static": StaticViewSitemap,
@@ -28,6 +29,8 @@ sitemaps = {
 }
 
 urlpatterns = [
+    path("", coming_soon_view),
+    path("<path:path>", coming_soon_view),
     path("admin/", admin.site.urls),
     path("", include("website.urls")),
     path("blog/", include("blog.urls")),
