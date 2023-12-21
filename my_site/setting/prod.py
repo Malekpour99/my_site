@@ -14,6 +14,9 @@ CSRF_COOKIE_SECURE = True
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+# Redirecting to coming soon template
+COMING_SOON = False  # Set to False when you are ready to launch
+
 ALLOWED_HOSTS = ["themalekpour.com", "www.themalekpour.com"]
 
 # INSTALLED_APPS # if required
