@@ -29,8 +29,8 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path("", coming_soon_view),
-    path("<path:path>", coming_soon_view),
+    # path("", coming_soon_view),
+    # path("<path:path>", coming_soon_view),
     path("admin/", admin.site.urls),
     path("", include("website.urls")),
     path("blog/", include("blog.urls")),
