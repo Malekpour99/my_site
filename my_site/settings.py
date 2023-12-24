@@ -53,6 +53,17 @@ MIDDLEWARE = [
     "website.middleware.ComingSoonMiddleware",
 ]
 
+# Specifying static file finders for Django compressor
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+# Enabling Django compressor
+COMPRESS_ENABLED = True
+# Enabling offline compressing for Django compressor
+COMPRESS_OFFLINE = True
 
 # Robots
 ROBOTS_USE_HOST = True
