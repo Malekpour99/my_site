@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     "captcha",
     "website.apps.WebsiteConfig",
     "blog.apps.BlogConfig",
-    "accounts.apps.AccountsConfig"
+    "accounts.apps.AccountsConfig",
+    "compressor",
 ]
 
 MIDDLEWARE = [
